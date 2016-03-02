@@ -4,6 +4,7 @@ public aspect HelloAspect {
 
 	/**
 	 * 传入参数执行
+	 * 
 	 * @param i
 	 */
 	pointcut HelloWorldPointCut(int i) : 
@@ -22,13 +23,22 @@ public aspect HelloAspect {
 	before(): TestCall() {
 		System.out.println("Entering : " + thisJoinPoint.getSourceLocation());
 	}
-	
+
 	/**
 	 * 测试execution
 	 */
 	pointcut TestExec(): execution(* main(int));
-	
+
 	before(): TestExec() {
+		System.out.println("Entering : " + thisJoinPoint.getSourceLocation());
+	}
+
+	/**
+	 * 排除某些特定的类 这里使用within排除了HelloAspectDemo中的main方法
+	 */
+	pointcut ExceptSomeFunc(): execution(* main(..)) && !within(HelloAspectDemo);
+
+	before(): ExceptSomeFunc() {
 		System.out.println("Entering : " + thisJoinPoint.getSourceLocation());
 	}
 }
