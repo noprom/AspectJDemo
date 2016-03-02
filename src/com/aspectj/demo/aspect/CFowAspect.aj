@@ -8,6 +8,7 @@ public aspect CFowAspect {
 
 	/**
 	 * cflow的参数是一个pointcut
+	 * 在使用cflow的时候需要剔除aspect本身
 	 */
 	pointcut barCfow() : cflow(barPoint()) && !within(CFowAspect);
 
