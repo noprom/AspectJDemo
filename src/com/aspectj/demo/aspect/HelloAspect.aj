@@ -41,4 +41,17 @@ public aspect HelloAspect {
 	before(): ExceptSomeFunc() {
 		System.out.println("Entering : " + thisJoinPoint.getSourceLocation());
 	}
+
+	/**
+	 * 测试around通知
+	 * 
+	 * @param x
+	 */
+	pointcut TestAround(int x): execution(* main(int)) && !within(HelloAspectDemo) && args(x);
+
+	int around(int x) : TestAround(x){
+		System.out.println("Entering : " + thisJoinPoint.getSourceLocation());
+		int newValue = proceed(x * 3);
+		return newValue;
+	}
 }
