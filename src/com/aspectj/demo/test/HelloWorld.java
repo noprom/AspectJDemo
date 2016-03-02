@@ -2,8 +2,12 @@ package com.aspectj.demo.test;
 
 public class HelloWorld {
 
-	public static void main(String[] args) {
+	public static void main(int i) {
+		System.out.println("int the main method  i = " + i);
+	}
 
+	public static void main(String[] args) {
+		main(5);
 	}
 
 }
